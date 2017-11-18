@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "./",
+    "module": "es2015",
+    "types": []
+  },
+  "include": [
+    "../node_modules/ngx-masonry-layout/lib/masonry-layout.directive.ts",
+    "../node_modules/angular2-masonry/index.ts",
+    "../src/main.ts",
+    "../src/polyfills.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}
