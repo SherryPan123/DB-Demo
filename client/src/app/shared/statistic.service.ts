@@ -1,12 +1,14 @@
-import { Injectable } from "@angular/core";
-import { Photo } from "../../photo-list/photo";
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
+import {of} from "rxjs/observable/of";
 import { catchError } from "rxjs/operators";
 
 @Injectable()
-export class PhotoService {
+export class StatisticService {
+
+  results:string[];
+
   constructor(
     private http: HttpClient,
   ) {}
@@ -30,14 +32,10 @@ export class PhotoService {
   }
 
   /* GET photos whose name contains search term */
-  searchPhotos(term: string): Observable<Photo[]> {
-    if (!term.trim()) {
-      // if not search term, return empty photo array.
-      return of([]);
-    }
-    const url = this.serverUrl+`/photos?term=${term}`;
-    return this.http.get<Photo[]>(this.serverUrl+`/photos?term=${term}`).pipe(
-      catchError(this.handleError<Photo[]>('searchPhotos', []))
+  searchStatistic(): Observable<string[]> {
+    console.log(this.serverUrl+`/statistic`);
+    return this.http.get<string[]>(this.serverUrl+`/statistic`).pipe(
+      catchError(this.handleError<string[]>('searchStatistic', []))
     );
   }
 

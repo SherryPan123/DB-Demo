@@ -4,7 +4,7 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": []
+    "types": ["node"]
   },
   "include": [
     "../node_modules/ngx-masonry-layout/lib/masonry-layout.directive.ts",
@@ -17,3 +17,4 @@
     "**/*.spec.ts"
   ]
 }
+

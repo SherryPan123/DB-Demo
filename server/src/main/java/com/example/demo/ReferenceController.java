@@ -66,7 +66,7 @@ public class ReferenceController {
     }
 
     @GetMapping("/statistic")
-    public String statistic(@RequestParam("year") String year) {
+    public String statistic(@RequestParam(name = "year", required = false) String year) {
         // 根据起始年份月份搜索相机对应的照片数量，如2013，即搜索2013从1月到12月的相机对应照片数量 -> lineChart
         // 统计在这一年中几种相机拍摄照片分别占比 -> pieChart
         // 以JSON格式返回如下：
@@ -77,7 +77,8 @@ public class ReferenceController {
          "pieChart":[{"type":"Iphone", "percent":"20%"},{"type":"Samsung","percent":"15%"},{……}]
          }
          */
-        return null;
+        System.out.println("hi~");
+        return "{\"results\":[1.2,5.2,12.2,6.3,7.7]}";
     }
 
 }

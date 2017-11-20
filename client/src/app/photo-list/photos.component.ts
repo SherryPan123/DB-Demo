@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
-import {Photo} from "./photo";
-import {PhotoService} from "../shared/photo/photo.service";
-import {ActivatedRoute, Params} from "@angular/router";
-import {Observable} from "rxjs/Observable";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { Photo } from "./photo";
+import { PhotoService } from "../shared/photo/photo.service";
+import { ActivatedRoute, Params } from "@angular/router";
+import { Observable } from "rxjs/Observable";
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
 
 @Component({
