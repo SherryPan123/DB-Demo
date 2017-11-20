@@ -59,26 +59,83 @@ public class ReferenceController {
         return null;
     }
 
-    @GetMapping("/cameras")
-    public List<Camera> searchCamerasTop10() {
-        // 搜对应照片数最多的相机（前10个）
-        return null;
+//    @GetMapping("/cameras")
+//    public String searchCamerasTop10() {
+//        // 搜对应照片数最多的相机（前10个）
+//        String s = "[{\"value\":\"iphone\",\"display\":\"苹果\"}," +
+//                "{\"value\":\"samsung\",\"display\":\"三星\"}," +
+//                "{\"value\":\"mi\",\"display\":\"小米\"}]";
+//        System.out.println(s);
+//        return s;
+//    }
+//
+//    @GetMapping("/cities")
+//    public String searchCities() {
+//        // 搜所有城市
+//        String s = "[{\"value\":\"Shanghai\",\"display\":\"上海\"}," +
+//                "{\"value\":\"NewYork\",\"display\":\"纽约\"}," +
+//                "{\"value\":\"Chicago\",\"display\":\"芝加哥\"}]";
+//        System.out.println(s);
+//        return s;
+//    }
+
+     /*
+        以JSON格式返回如下：
+        {"lineChart":[{"name":"iphone","data":[1,2,3,4,5,6,7,8,9,10,11,12]},
+                     {"name":"iphone","data":[1,2,3,4,5,6,7,8,9,10,11,12]},
+                     {……}],
+         "pieChart":[{"name":"Iphone", "percent":"20%"},{"type":"Samsung","percent":"15%"},{……}]
+         "barChart":[{},{},{……}]
+
+         }
+    */
+    @GetMapping("/statistic/photos")
+    public String searchPhotoNumberByCameraYear(
+            @RequestParam(name = "year", defaultValue = "2017") String year,
+            @RequestParam(name = "cameras", required = false) String[] cameras) {
+        // 根据起始年份月份搜索相机对应的照片数量，如2013，即搜索2013从1月到12月的相机对应照片数量 -> lineChart
+//        System.out.println(year);
+//        for (int i=0; i<cameras.length; i++) {
+//            System.out.println(cameras[i]);
+//        }
+        return "[{\"name\":\"iphone\",\"data\":[1.2,5.2,12.2,9.3,7.7,14.2,1.2,7.2,12.2,6.3,7.7,14.2]}," +
+                "{\"name\":\"sansung\",\"data\":[-1.2,5.2,12.2,6.3,9.7,18.2,1.2,3.2,12.2,6.3,4.7,12.2]}," +
+                "{\"name\":\"mi\",\"data\":[5.2,7.2,6.2,6.3,9.7,12.2,1.2,5.2,12.2,6.3,9.7,4.2]}]";
     }
 
-    @GetMapping("/statistic")
-    public String statistic(@RequestParam(name = "year", required = false) String year) {
-        // 根据起始年份月份搜索相机对应的照片数量，如2013，即搜索2013从1月到12月的相机对应照片数量 -> lineChart
+    @GetMapping("/statistic/cameras")
+    public String searchCameraPercentByCameraYear(
+            @RequestParam(name = "year", defaultValue = "2017") String year,
+            @RequestParam(name = "cameras", required = false) String[] cameras) {
         // 统计在这一年中几种相机拍摄照片分别占比 -> pieChart
-        // 以JSON格式返回如下：
-        /*
-        {"lineChart":[{"type":"iphone","numberOfPhotos":[1,2,3,4,5,6,7,8,9,10,11,12]},
-                     {"type":"iphone","numberOfPhotos":[1,2,3,4,5,6,7,8,9,10,11,12]},
-                     {……}],
-         "pieChart":[{"type":"Iphone", "percent":"20%"},{"type":"Samsung","percent":"15%"},{……}]
-         }
-         */
-        System.out.println("hi~");
-        return "{\"results\":[1.2,5.2,12.2,6.3,7.7]}";
+//        System.out.println(year);
+//        for (int i=0; i<cameras.length; i++) {
+//            System.out.println(cameras[i]);
+//        }
+        return "[{\"name\":\"iphone\",\"y\":23.6}," +
+                "{\"name\":\"sansung\",\"y\":15.2}," +
+                "{\"name\":\"Huawei\",\"y\":9.2}," +
+                "{\"name\":\"Nokia\",\"y\":7.2}," +
+                "{\"name\":\"mi\",\"y\":2.2}," +
+                "{\"name\":\"DENSO\",\"y\":10.2}," +
+                "{\"name\":\"Acer\",\"y\":4.2}," +
+                "{\"name\":\"Panasonnic\",\"y\":2.2}," +
+                "{\"name\":\"Canon\",\"y\":6.2}," +
+                "{\"name\":\"others\",\"y\":19.8}]";
+    }
+
+    @GetMapping("/statistic/photosOfCities")
+    public String searchPhotoNumberByCitiesYear(
+            @RequestParam(name = "year", defaultValue = "2017") String year,
+            @RequestParam(name = "cities", required = false) String[] cities) {
+        // 统计在这一年中几种相机拍摄照片分别占比 -> pieChart
+//        System.out.println(year);
+//        for (int i=0; i<cities.length; i++) {
+//            System.out.println(cities[i]);
+//        }
+        return "[{\"name\":\"Shanghai\",\"data\":[1.2,5.2,12.2,9.3,7.7,14.2,1.2,7.2,12.2,6.3,7.7,14.2]}," +
+                "{\"name\":\"NewYork\",\"data\":[-1.2,5.2,12.2,6.3,9.7,18.2,1.2,3.2,12.2,6.3,4.7,12.2]}," +
+                "{\"name\":\"London\",\"data\":[5.2,7.2,6.2,6.3,9.7,12.2,1.2,5.2,12.2,6.3,9.7,4.2]}]";
     }
 
 }

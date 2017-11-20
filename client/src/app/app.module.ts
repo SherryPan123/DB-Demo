@@ -13,6 +13,9 @@ import { MasonryModule } from 'angular2-masonry';
 import { ChartModule } from "angular2-highcharts";
 import { HighchartsStatic } from "angular2-highcharts/dist/HighchartsService";
 import {StatisticService} from "./shared/statistic.service";
+import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule, MatCheckboxModule, MatSliderModule, MatTabsModule} from "@angular/material";
 
 export function highchartsFactory() {
   return require('highcharts');
@@ -32,7 +35,19 @@ export function highchartsFactory() {
     HttpClientModule,
     MdCardModule,
     MasonryModule,
-    ChartModule
+    ChartModule,
+    MultiselectDropdownModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatTabsModule
+  ],
+  exports: [
+    MatButtonModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatTabsModule
   ],
   providers: [
     PhotoService,

@@ -1,2 +1,44 @@
-<h1>
-</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Export</a></li>
+      </ul>
+      <div>
+        <label>年份 </label>
+        <input [(ngModel)]="query.year" />
+        <!--<mat-slider min="1970" max="2017" step="1" [(ngModel)]="query.year"></mat-slider>-->
+      </div>
+      <div>
+        <label>城市 </label>
+        <ss-multiselect-dropdown [options]="cities" [(ngModel)]="query.cities"></ss-multiselect-dropdown>
+      </div>
+      <div>
+        <label>相机 </label>
+        <ss-multiselect-dropdown [options]="cameras" [(ngModel)]="query.cameras"></ss-multiselect-dropdown>
+      </div>
+      <div>
+        <button (click)="search()">搜索</button>
+      </div>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h1 class="page-header">Dashboard</h1>
+
+      <mat-tab-group>
+        <mat-tab label="Tab 1"><chart [options]="options1" (load)="saveInstance1($event.context)"></chart></mat-tab>
+        <mat-tab label="Tab 2"><chart [options]="options2" (load)="saveInstance2($event.context)"></chart></mat-tab>
+        <mat-tab label="Tab 3"><chart [options]="options3" (load)="saveInstance3($event.context)"></chart></mat-tab>
+      </mat-tab-group>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

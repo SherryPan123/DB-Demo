@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {of} from "rxjs/observable/of";
 import { catchError } from "rxjs/operators";
+import { Query } from "../statistic/query";
 
 @Injectable()
 export class StatisticService {
@@ -32,10 +33,29 @@ export class StatisticService {
   }
 
   /* GET photos whose name contains search term */
-  searchStatistic(): Observable<string[]> {
+  searchStatistic(query: Query): Observable<string[]> {
     console.log(this.serverUrl+`/statistic`);
     return this.http.get<string[]>(this.serverUrl+`/statistic`).pipe(
       catchError(this.handleError<string[]>('searchStatistic', []))
+    );
+  }
+
+  searchPhotos(query: Query): Observable<string[]> {
+    return this.http.get<string[]>(this.serverUrl+`/statistic/photos?year=${query.year}&cameras=${query.cameras}`).pipe(
+      catchError(this.handleError<string[]>('searchPhotos', []))
+    );
+  }
+
+  searchCameras(query: Query): Observable<string[]> {
+    console.log(query.cameras);
+    return this.http.get<string[]>(this.serverUrl+`/statistic/cameras?year=${query.year}&cameras=${query.cameras}`).pipe(
+      catchError(this.handleError<string[]>('searchCameras', []))
+    );
+  }
+
+  searchPhotosOfCities(query: Query): Observable<string[]> {
+    return this.http.get<string[]>(this.serverUrl+`/statistic/photosOfCities?year=${query.year}&cities=${query.cities}`).pipe(
+      catchError(this.handleError<string[]>('searchPhotosOfCities', []))
     );
   }
 
