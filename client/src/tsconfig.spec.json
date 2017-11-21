@@ -16,7 +16,7 @@
   "include": [
     "**/*.spec.ts",
     "**/*.d.ts",
-    "../node_modules/ngx-masonry-layout/lib/masonry-layout.directive.ts",
+//    "../node_modules/ngx-masonry-layout/lib/masonry-layout.directive.ts",
     "../node_modules/angular2-masonry/index.ts",
     "../src/main.ts",
     "../src/polyfills.ts"

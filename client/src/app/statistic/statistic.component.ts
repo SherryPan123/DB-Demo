@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { StatisticService } from "../shared/statistic.service";
 import { ActivatedRoute } from "@angular/router";
-import { ChartObject } from "highcharts";
 import { Query } from "./query";
-import {IMultiSelectOption} from "angular-2-dropdown-multiselect";
-import {ChartComponent} from "angular2-highcharts";
+import { IMultiSelectOption } from "angular-2-dropdown-multiselect";
+import { ChartComponent } from "angular2-highcharts";
+import { ChartObject } from "highcharts";
+import {NgbTabChangeEvent, NgbTabset} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-statistic',
@@ -23,8 +24,10 @@ export class StatisticComponent implements OnInit {
   query: Query;
 
   // cameras: string;
-  cities: IMultiSelectOption[];
-  cameras: IMultiSelectOption[];
+  // cities: IMultiSelectOption[];
+  // cameras: IMultiSelectOption[];
+  cities: Object;
+  cameras: Object;
 
   saveInstance1(chartInstance) {
     this.chart1 = chartInstance;
@@ -38,41 +41,95 @@ export class StatisticComponent implements OnInit {
     this.chart3 = chartInstance;
   }
 
-  search() {
-    this.drawCharts();
-  }
-
-  constructor(private statisticService: StatisticService, private activatedRoute: ActivatedRoute) {
+  constructor(private statisticService: StatisticService) {
     this.query = new Query();
     this.cities = [
-      { id: 'Shanghai', name: 'Shanghai' },
-      { id: 'NewYork', name: 'NewYork' },
-      { id: 'Beijing', name: 'Beijing' },
-      { id: 'Chicago', name: 'Chicago' },
-      { id: 'Singapore', name: 'Singapore' }
+      { id: 'shanghai', name: 'Shanghai', status: false },
+      { id: 'newyork', name: 'New York', status: false },
+      { id: 'beijing', name: 'Beijing', status: false },
+      { id: 'chicago', name: 'Chicago', status: false },
+      { id: 'singapore', name: 'Singapore', status: false }
     ];
     this.cameras = [
-      { id: 'IPhone', name: 'IPhone' },
-      { id: 'Samsung', name: 'Samsung' },
-      { id: 'Mi', name: 'Mi' },
-      { id: 'Huawei', name: 'Huawei' },
-      { id: 'Canon', name: 'Canon' },
-      { id: 'Nokia', name: 'Nokia' },
-      { id: 'CHASE', name: 'CHASE' },
-      { id: 'DENSO', name: 'DENSO' },
-      { id: 'Acer', name: 'Acer' },
-      { id: 'Panasonnic', name: 'Panasonnic' }
+      { id: 'iphone', name: 'iPhone', status: false },
+      { id: 'samsung', name: 'Samsung', status: false },
+      { id: 'mi', name: 'Mi', status: false },
+      { id: 'huawei', name: 'Huawei', status: false },
+      { id: 'canon', name: 'Canon', status: false },
+      { id: 'nokia', name: 'Nokia', status: false },
+      { id: 'chase', name: 'CHASE', status: false },
+      { id: 'denso', name: 'DENSO', status: false },
+      { id: 'acer', name: 'Acer', status: false },
+      { id: 'panasonnic', name: 'Panasonnic', status: false }
     ]
   }
 
   ngOnInit() {
-    this.drawCharts();
+    this.drawLine();
+    //this.drawCharts();
   }
+
+  search(t: NgbTabset) {
+    console.log(this.cameras);
+    console.log(this.cities);
+    this.query.cities = "";
+    this.query.cameras = "";
+    for(var k in this.cameras) {
+      if (this.cameras[k].status) {
+        this.query.cameras = this.query.cameras + this.cameras[k].id +",";
+      }
+    }
+    for(var k in this.cities) {
+      if (this.cities[k].status) {
+        this.query.cities = this.query.cities + this.cities[k].id +",";
+      }
+    }
+    console.log(this.query.year);
+    console.log(this.query.cities);
+    console.log(this.query.cameras);
+    if (t.activeId === 'tab-1') {
+      this.drawLine();
+    } else if (t.activeId === 'tab-2') {
+      this.drawPie();
+    } else if (t.activeId === 'tab-3') {
+      this.drawBar();
+    }
+
+  }
+
+  changeQueryYear(year:number) {
+    console.log(year);
+    this.query.year = year;
+  }
+
+  public beforeChange($event: NgbTabChangeEvent) {
+    if ($event.nextId === 'tab-1') {
+      //if (this.chart1) this.chart1.destroy();
+      //if (this.chart2) this.chart2.destroy();
+      //if (this.chart3) this.chart3.destroy();
+      this.drawLine();
+    } else if ($event.nextId === 'tab-2') {
+      //if (this.chart1) this.chart1.destroy();
+      //if (this.chart2) this.chart2.destroy();
+      //if (this.chart3) this.chart3.destroy();
+      this.drawPie();
+    } else if ($event.nextId === 'tab-3') {
+      //if (this.chart1) this.chart1.destroy();
+      //if (this.chart2) this.chart2.destroy();
+      //if (this.chart3) this.chart3.destroy();
+      this.drawBar();
+    } else {
+      //if (this.chart1) this.chart1.destroy();
+      //if (this.chart2) this.chart2.destroy();
+      //if (this.chart3) this.chart3.destroy();
+      $event.preventDefault();
+    }
+  };
 
   private drawLine() {
     this.options1 = {
       chart: { type: 'line' },
-      title: { text : '各品牌相机拍摄照片数'},
+      title: "",
       xAxis: {
         title: {
           text: '月份'
@@ -92,14 +149,13 @@ export class StatisticComponent implements OnInit {
           enableMouseTracking: false
         }
       },
-      series: []
+      series: [{}]
     };
     this.statisticService.searchPhotos(this.query).subscribe(
       data => {
         data.forEach(
           adata => {
-            var series = {name:adata['name'], data:adata['data']};
-            this.chart1.addSeries(series);
+            this.chart1.addSeries({name:adata['name'], data:adata['data']});
           }
         )
       }
@@ -109,7 +165,7 @@ export class StatisticComponent implements OnInit {
   private drawPie() {
     this.options2 = {
       chart: { type: 'pie' },
-      title: { text : '各品牌相机拍摄照片比例'},
+      title: "",
       xAxis: {
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       },
@@ -133,8 +189,8 @@ export class StatisticComponent implements OnInit {
     this.statisticService.searchCameras(this.query).subscribe(
       data => {
         data.forEach(
-          adata => {
-            this.chart2.series[0].addPoint([adata['name'], adata['y'], false]);
+          _ => {
+            this.chart2.series[0].addPoint([_['name'], _['y'], false]);
           }
         )
       }
@@ -144,7 +200,7 @@ export class StatisticComponent implements OnInit {
   private drawBar() {
     this.options3 = {
       chart: { type: 'column' },
-      title: { text : '各城市发布照片数'},
+      title: "",//{ text : '各城市发布照片数'},
       xAxis: {
         title: {
           text: '月份'
@@ -170,18 +226,11 @@ export class StatisticComponent implements OnInit {
       data => {
         data.forEach(
           adata => {
-            var series = {name:adata['name'], data:adata['data']};
-            this.chart3.addSeries(series);
+            this.chart3.addSeries({name:adata['name'], data:adata['data']});
           }
         )
       }
     );
-  }
-
-  private drawCharts() {
-    this.drawLine();
-    this.drawPie();
-    this.drawBar();
   }
 
 }

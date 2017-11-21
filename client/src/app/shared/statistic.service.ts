@@ -47,7 +47,7 @@ export class StatisticService {
   }
 
   searchCameras(query: Query): Observable<string[]> {
-    console.log(query.cameras);
+    //console.log(query.cameras);
     return this.http.get<string[]>(this.serverUrl+`/statistic/cameras?year=${query.year}&cameras=${query.cameras}`).pipe(
       catchError(this.handleError<string[]>('searchCameras', []))
     );

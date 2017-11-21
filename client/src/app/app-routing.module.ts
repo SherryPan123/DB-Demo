@@ -6,13 +6,13 @@ import {StatisticComponent} from "./statistic/statistic.component";
 
 const routes: Routes = [
   { path: 'photos', component: PhotosComponent },
+  { path: '', component: IndexComponent },
   { path: 'index', component: IndexComponent },
-  { path: 'statistic', component: StatisticComponent },
-  { path: '', redirectTo: '/index', pathMatch: 'full' }
+  { path: 'statistic', component: StatisticComponent }
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
 

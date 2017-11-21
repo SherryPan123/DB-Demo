@@ -8,14 +8,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { PhotoService } from "./shared/photo/photo.service";
 import { AppRoutingModule } from "./app-routing.module";
-import { MdCardModule } from '@angular2-material/card';
 import { MasonryModule } from 'angular2-masonry';
 import { ChartModule } from "angular2-highcharts";
 import { HighchartsStatic } from "angular2-highcharts/dist/HighchartsService";
-import {StatisticService} from "./shared/statistic.service";
-import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatButtonModule, MatCheckboxModule, MatSliderModule, MatTabsModule} from "@angular/material";
+import { StatisticService } from "./shared/statistic.service";
+import { MultiselectDropdownModule } from "angular-2-dropdown-multiselect";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import {
+//   MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
+//   MatMenuModule, MatOptionModule, MatSelectModule, MatSliderModule,
+//   MatTabsModule, MatToolbarModule
+// } from "@angular/material";
+// import {MdCardModule} from "@angular2-material/card";
 
 export function highchartsFactory() {
   return require('highcharts');
@@ -33,21 +38,38 @@ export function highchartsFactory() {
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    MdCardModule,
+    // MdCardModule,
     MasonryModule,
     ChartModule,
     MultiselectDropdownModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatSliderModule,
-    MatTabsModule
+    NgbModule.forRoot()
+    // MatButtonModule,
+    // MatCheckboxModule,
+    // MatSliderModule,
+    // MatTabsModule,
+    // MatGridListModule,
+    // MatIconModule,
+    // MatToolbarModule,
+    // MatCardModule,
+    // MatMenuModule,
+    // MatFormFieldModule,
+    // MatOptionModule,
+    // MatSelectModule,
   ],
   exports: [
-    MatButtonModule,
-    MatCheckboxModule,
-    MatSliderModule,
-    MatTabsModule
+    // MatButtonModule,
+    // MatCheckboxModule,
+    // MatSliderModule,
+    // MatTabsModule,
+    // MatGridListModule,
+    // MatIconModule,
+    // MatToolbarModule,
+    // MatCardModule,
+    // MatMenuModule,
+    // MatFormFieldModule,
+    // MatOptionModule,
+    // MatSelectModule
   ],
   providers: [
     PhotoService,

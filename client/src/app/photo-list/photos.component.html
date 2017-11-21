@@ -1,10 +1,7 @@
 <h2>My Photos</h2>
 
 <masonry [options]="options">
-  <md-card masonry-brick *ngFor="let photo of photos$ | async">
+  <div masonry-brick *ngFor="let photo of photos$ | async">
     <img *ngIf="photo.image" src="{{photo.image}}" style="width:100%;">
-  </md-card>
+  </div>
 </masonry>
-
-
-

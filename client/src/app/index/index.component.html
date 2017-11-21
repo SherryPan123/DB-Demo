@@ -1,4 +1,37 @@
-<div id="index-component">
-  <input #searchBox id="search-box" />
-  <button (click)="search(searchBox.value)">submit</button>
+<!--<div class="blog-header">-->
+  <!--<div class="container">-->
+    <!--<h1 class="blog-title">数据库项目演示</h1>-->
+    <!--<p class="lead blog-description">An example blog template built with Bootstrap.</p>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 offset-md-5"><img src="../../assets/f.jpg" style="height: 120px"></div>
+    <div class="col-md-12">
+      <br>
+    </div>
+    <div class="col-md-6 offset-md-3">
+      <div class="form-group">
+        <div class="input-group">
+          <select class="custom-select" #searchType required>
+            <option value="1">搜图片</option>
+            <option value="2">搜用户</option>
+          </select>
+          <input #searchBox id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="model" placeholder="Search for a photo/../.." />
+          <button type="button" class="btn btn-outline-primary" (click)="search(searchBox.value, searchType.value)">Search</button>
+          <span *ngIf="searching">searching...</span>
+          <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+    <!--<nav class="blog-pagination">-->
+      <!--<a class="btn btn-outline-primary" href="#">Older</a>-->
+      <!--<a class="btn btn-outline-secondary disabled" href="#">Newer</a>-->
+    <!--</nav>-->
+

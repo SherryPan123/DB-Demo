@@ -92,12 +92,13 @@ public class ReferenceController {
     @GetMapping("/statistic/photos")
     public String searchPhotoNumberByCameraYear(
             @RequestParam(name = "year", defaultValue = "2017") String year,
-            @RequestParam(name = "cameras", required = false) String[] cameras) {
+            @RequestParam(name = "cameras", required = false) String camerasStr) {
         // 根据起始年份月份搜索相机对应的照片数量，如2013，即搜索2013从1月到12月的相机对应照片数量 -> lineChart
-//        System.out.println(year);
-//        for (int i=0; i<cameras.length; i++) {
-//            System.out.println(cameras[i]);
-//        }
+        System.out.println(year);
+        String[] cameras = camerasStr.split(",");
+        for (int i=0; i<cameras.length; i++) {
+            System.out.println(cameras[i]);
+        }
         return "[{\"name\":\"iphone\",\"data\":[1.2,5.2,12.2,9.3,7.7,14.2,1.2,7.2,12.2,6.3,7.7,14.2]}," +
                 "{\"name\":\"sansung\",\"data\":[-1.2,5.2,12.2,6.3,9.7,18.2,1.2,3.2,12.2,6.3,4.7,12.2]}," +
                 "{\"name\":\"mi\",\"data\":[5.2,7.2,6.2,6.3,9.7,12.2,1.2,5.2,12.2,6.3,9.7,4.2]}]";
@@ -106,12 +107,13 @@ public class ReferenceController {
     @GetMapping("/statistic/cameras")
     public String searchCameraPercentByCameraYear(
             @RequestParam(name = "year", defaultValue = "2017") String year,
-            @RequestParam(name = "cameras", required = false) String[] cameras) {
+            @RequestParam(name = "cameras", required = false) String camerasStr) {
         // 统计在这一年中几种相机拍摄照片分别占比 -> pieChart
-//        System.out.println(year);
-//        for (int i=0; i<cameras.length; i++) {
-//            System.out.println(cameras[i]);
-//        }
+        System.out.println(year);
+        String[] cameras = camerasStr.split(",");
+        for (int i=0; i<cameras.length; i++) {
+            System.out.println(cameras[i]);
+        }
         return "[{\"name\":\"iphone\",\"y\":23.6}," +
                 "{\"name\":\"sansung\",\"y\":15.2}," +
                 "{\"name\":\"Huawei\",\"y\":9.2}," +
@@ -127,12 +129,13 @@ public class ReferenceController {
     @GetMapping("/statistic/photosOfCities")
     public String searchPhotoNumberByCitiesYear(
             @RequestParam(name = "year", defaultValue = "2017") String year,
-            @RequestParam(name = "cities", required = false) String[] cities) {
+            @RequestParam(name = "cities", required = false) String citiesStr) {
         // 统计在这一年中几种相机拍摄照片分别占比 -> pieChart
-//        System.out.println(year);
-//        for (int i=0; i<cities.length; i++) {
-//            System.out.println(cities[i]);
-//        }
+        System.out.println(year);
+        String[] cities = citiesStr.split(",");
+        for (int i=0; i<cities.length; i++) {
+            System.out.println(cities[i]);
+        }
         return "[{\"name\":\"Shanghai\",\"data\":[1.2,5.2,12.2,9.3,7.7,14.2,1.2,7.2,12.2,6.3,7.7,14.2]}," +
                 "{\"name\":\"NewYork\",\"data\":[-1.2,5.2,12.2,6.3,9.7,18.2,1.2,3.2,12.2,6.3,4.7,12.2]}," +
                 "{\"name\":\"London\",\"data\":[5.2,7.2,6.2,6.3,9.7,12.2,1.2,5.2,12.2,6.3,9.7,4.2]}]";
