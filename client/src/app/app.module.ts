@@ -15,6 +15,8 @@ import { StatisticService } from "./shared/statistic.service";
 import { MultiselectDropdownModule } from "angular-2-dropdown-multiselect";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {TimelineComponent} from "./timeline/timeline.component";
+import {TimelineService} from "./shared/timeline.service";
 // import {
 //   MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
 //   MatMenuModule, MatOptionModule, MatSelectModule, MatSliderModule,
@@ -31,7 +33,8 @@ export function highchartsFactory() {
     AppComponent,
     IndexComponent,
     PhotosComponent,
-    StatisticComponent
+    StatisticComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ export function highchartsFactory() {
   providers: [
     PhotoService,
     StatisticService,
+    TimelineService,
     {
       provide: HighchartsStatic,
       useFactory: highchartsFactory

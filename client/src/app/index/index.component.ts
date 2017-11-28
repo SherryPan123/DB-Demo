@@ -48,7 +48,7 @@ export class IndexComponent implements OnInit {
     if (type == "1") {
       this.router.navigateByUrl('/photos?term='+term);
     } else {
-      // this.router.navigateByUrl('/timeline?term='+term);
+      this.router.navigateByUrl('/timeline?term='+term);
     }
   }
 
