@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {TimelineComponent} from "./timeline/timeline.component";
 import {TimelineService} from "./shared/timeline.service";
+import {UserService} from "./shared/user.service";
 // import {
 //   MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
 //   MatMenuModule, MatOptionModule, MatSelectModule, MatSliderModule,
@@ -78,6 +79,7 @@ export function highchartsFactory() {
     PhotoService,
     StatisticService,
     TimelineService,
+    UserService,
     {
       provide: HighchartsStatic,
       useFactory: highchartsFactory

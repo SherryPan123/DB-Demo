@@ -19,7 +19,13 @@ export class PhotosComponent implements OnInit, AfterViewInit {
 
   // Options
   options: MasonryOptions = {
-    transitionDuration: '0.3s'
+    transitionDuration: '0.3s',
+    columnWidth: 10,
+    itemSelector: '.card',
+    resize: true,
+    // percentPosition: true,
+    fitWidth: true,
+    gutter: 4
   };
 
   ngAfterViewInit() {

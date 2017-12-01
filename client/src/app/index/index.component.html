@@ -14,12 +14,13 @@
   <div class="col-md-6 offset-md-3">
     <div class="form-group">
       <div class="input-group">
-        <select class="custom-select" #searchType required>
-          <option value="1">搜图片</option>
-          <option value="2">搜用户</option>
+        <select class="custom-select" #searchType required (change)="changeSearchType(searchType.value)">
+          <option value="1">Search Photos</option>
+          <option value="2">Search Users</option>
         </select>
-        <input #searchBox id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="model" placeholder="Search for a photo/../.." />
+        <input #searchBox id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [ngbTypeahead]="typeahead" [(ngModel)]="user" [inputFormatter]="searchContent" [resultFormatter]="searchContent" placeholder="Descriptions" (selectItem)="selectedItem($event)" />
         <button type="button" class="btn btn-outline-primary" (click)="search(searchBox.value, searchType.value)">Search</button>
+        <!--<pre>Model: {{ user | json }}</pre>-->
         <span *ngIf="searching">searching...</span>
         <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       </div>

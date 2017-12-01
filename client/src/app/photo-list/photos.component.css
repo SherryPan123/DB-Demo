@@ -30,8 +30,20 @@
 }
 
 
-[masonry-brick]{
-  width: 250px;
-  margin: 10px;
-  background: rgb(0, 0, 0);
+/*[masonry-brick]{*/
+  /*width: 250px;*/
+  /*margin: 10px;*/
+  /*background: rgb(0, 0, 0);*/
+/*}*/
+p {
+  color: #999;
+}
+
+.card {
+  margin-bottom: 4px;
+  /*width: 40%*/
+}
+
+.masonry-container {
+  margin: 0 auto; /* this is the css that keeps the container centered in page */
 }

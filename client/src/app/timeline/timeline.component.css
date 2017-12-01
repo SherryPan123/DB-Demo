@@ -6,3 +6,9 @@
 .masonry-container {
   margin: 0 auto; /* this is the css that keeps the container centered in page */
 }
+
+/*.masonry_item {*/
+  /*width:300px;*/
+  /*margin:0 auto 20px auto;*/
+  /*padding:20px;*/
+/*}*/

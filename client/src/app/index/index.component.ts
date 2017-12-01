@@ -9,7 +9,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
-import {PhotoService} from "../shared/photo/photo.service";
+import {UserService} from "../shared/user.service";
+import {User} from "./User";
 
 @Component({
   selector: 'app-index',
@@ -19,29 +20,36 @@ import {PhotoService} from "../shared/photo/photo.service";
 
 export class IndexComponent implements OnInit {
 
-  model: any;
+  search_type: boolean;
+
+  user: User;
   searching = false;
   searchFailed = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
+  searchContent = (user: {name: string}) => user.name;
 
-  constructor(private _service: PhotoService, private router: Router) {}
+  constructor(private _service: UserService, private router: Router) {}
 
-  typeahead = (text$: Observable<string>) =>
-    text$
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .do(() => this.searching = true)
-      .switchMap(term =>
-        this._service.searchPhotos(term)
-          .do(() => this.searchFailed = false)
-          .catch(() => {
-            this.searchFailed = true;
-            return Observable.of([]);
-          }))
-      .do(() => this.searching = false)
-      .merge(this.hideSearchingWhenUnsubscribed);
+  typeahead = (text$: Observable<string>) => (
+        text$
+          .debounceTime(300)
+          .distinctUntilChanged()
+          .do(() => this.searching = true)
+          .switchMap(term =>
+            this._service.searchUsers(term, this.search_type)
+              .do(() => this.searchFailed = false)
+              .catch(() => {
+                this.searchFailed = true;
+                return Observable.of([]);
+              }))
+          .do(() => this.searching = false)
+          .merge(this.hideSearchingWhenUnsubscribed)
 
-  ngOnInit() {}
+  );
+
+  ngOnInit() {
+    this.search_type = true;
+  }
 
   // Push a search term into the observable stream.
   search(term: string, type: string): void {
@@ -49,6 +57,18 @@ export class IndexComponent implements OnInit {
       this.router.navigateByUrl('/photos?term='+term);
     } else {
       this.router.navigateByUrl('/timeline?term='+term);
+    }
+  }
+
+  selectedItem(item) {
+    this.router.navigateByUrl('/timeline?term='+item.item.id);
+  }
+
+  changeSearchType(type: string): void {
+    if (type == "1") {
+      this.search_type = true;
+    } else {
+      this.search_type = false;
     }
   }
 

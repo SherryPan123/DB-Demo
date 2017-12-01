@@ -40,7 +40,7 @@
           <!--<div class="row">-->
             <!--<button class="btn btn-primary" type="submit">Follow</button>-->
           <!--</div>-->
-          <img class="rounded-circle float-right" src="{{detail.avatar}}" style="height: 150px; width:150px">
+          <img class="rounded-circle float-right" src="{{detail.avatar}}" style="height: 120px; width:120px">
         </div>
       </div>
     </div>
@@ -48,21 +48,17 @@
   <div class="col-1"></div>
 </div>
 
-<br>
-
 <div class="row">
   <div class="col-12">
-    <div class="masonry-container">
-        <masonry [options]="options">
-          <div masonry-brick *ngFor="let photoDetail of photosDetail$ | async">
-            <div class="card rounded border border-primary" style="max-width: 10rem;">
-              <img class="card-img-top" src="{{photoDetail.image}}" alt="Card image cap">
-              <div class="card-body" style="padding:0.5rem">
-                <p class="card-text">{{photoDetail.id}}</p>
-              </div>
+      <masonry [options]="options" class="masonry-container">
+        <div masonry-brick *ngFor="let photoDetail of photosDetail$ | async">
+          <div class="card rounded border border-primary" style="max-width: 10rem;">
+            <img class="card-img-top" src="{{photoDetail.image}}" alt="Card image cap">
+            <div class="card-body" style="padding:0.5rem">
+              <p class="card-text">{{photoDetail.id}}</p>
             </div>
           </div>
-        </masonry>
-    </div>
+        </div>
+      </masonry>
   </div>
 </div>
