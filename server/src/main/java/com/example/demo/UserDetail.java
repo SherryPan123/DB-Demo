@@ -9,12 +9,22 @@ public class UserDetail {
     private String username;
     private String realname;
     private String address;
+    private String avatar;
 
-    public UserDetail(int id, String username, String realname, String address) {
+    public UserDetail(int id, String username, String realname, String address, String avatar) {
         this.id = id;
         this.username = username;
         this.realname = realname;
         this.address = address;
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public int getId() {

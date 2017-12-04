@@ -8,25 +8,30 @@ import java.util.List;
 public class PhotoDetail {
 
     private int id;
-    private String path; //图片存储的路径
+    private String image; //图片存储的路径
     private String description; //图片描述
-    private List<Comment> commentList; //评论
+//    private List<Comment> commentList; //评论
 
     private int votes; //根据用户名和图片哈希得到的点赞数
     private int views; //根据用户名和图片哈希（不同上）得到的被查看次数
     private String firstLetter; //上传图片用户名字的首字母，用于生成头像
     private String background_color; //根据用户名哈希得到的背景色，用于生成头像
 
-    public PhotoDetail(int id, String path, String description, List<Comment> commentList, int votes, int views, String firstLetter, String background_color) {
+    public PhotoDetail(int id, String image) {
         this.id = id;
-        this.path = path;
-        this.description = description;
-        this.commentList = commentList;
-        this.votes = votes;
-        this.views = views;
-        this.firstLetter = firstLetter;
-        this.background_color = background_color;
+        this.image = image;
     }
+
+//    public PhotoDetail(int id, String image, String description, List<Comment> commentList, int votes, int views, String firstLetter, String background_color) {
+//        this.id = id;
+//        this.image = image;
+//        this.description = description;
+//        this.commentList = commentList;
+//        this.votes = votes;
+//        this.views = views;
+//        this.firstLetter = firstLetter;
+//        this.background_color = background_color;
+//    }
 
     public int getId() {
         return id;
@@ -36,12 +41,12 @@ public class PhotoDetail {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public String getImage() {
+        return image;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {
@@ -68,13 +73,13 @@ public class PhotoDetail {
         this.views = views;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
+//    public List<Comment> getCommentList() {
+//        return commentList;
+//    }
+//
+//    public void setCommentList(List<Comment> commentList) {
+//        this.commentList = commentList;
+//    }
 
     public String getFirstLetter() {
         return firstLetter;

@@ -29,6 +29,15 @@ public class ReferenceController {
         return photos;
     }
 
+    @GetMapping("/timeline")
+    public UserDetail[] searchUserDetail(@RequestParam("userId") String userId) {
+        UserDetail[] userDetails = new UserDetail[1];
+        String path = "/home/sherry/Desktop/photos/1.jpg";
+        String image = "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path));
+        userDetails[0] = new UserDetail(1, "XiaoMing", "小明", "上海市浦东新区", image);
+        return userDetails;
+    }
+
     private String encodeFileToBase64Binary(File file) {
         String encodedfile = null;
         try {
@@ -49,45 +58,37 @@ public class ReferenceController {
     @GetMapping("/users")
     public List<User> searchUsers(@RequestParam("term") String term) {
         // 根据关键字搜用户（模糊搜索）
-        return null;
+        List<User> results = new ArrayList<>();
+        results.add(new User(1, "Panningting", 10));
+        results.add(new User(2, "wujiaye", 10));
+        results.add(new User(3, "yeye", 10));
+        results.add(new User(4, "ningning", 10));
+        return results;
     }
 
-    @GetMapping("/user")
-    public String searchPhotosByUser(@RequestParam("userId") int userId) {
+    @GetMapping("/timeline_photos")
+    public List<PhotoDetail> searchPhotosByUser(@RequestParam("userId") String userId) {
         // 根据用户Id搜索该用户基本信息和他发布的所有图片
         // 以JSON格式返回UserDetail + List<PhotoDetail>
-        return null;
+        List<PhotoDetail> photoDetails = new ArrayList<>();
+        String path1 = "/home/sherry/Desktop/photos/1.jpg";
+        String path2 = "/home/sherry/Desktop/photos/2.jpg";
+        String path3 = "/home/sherry/Desktop/photos/3.jpg";
+        photoDetails.add(new PhotoDetail(1, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path1))));
+        photoDetails.add(new PhotoDetail(2, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path2))));
+        photoDetails.add(new PhotoDetail(3, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path3))));
+        photoDetails.add(new PhotoDetail(4, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path2))));
+        photoDetails.add(new PhotoDetail(5, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path1))));
+        photoDetails.add(new PhotoDetail(6, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path3))));
+        photoDetails.add(new PhotoDetail(7, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path2))));
+        photoDetails.add(new PhotoDetail(8, "data:image/jpeg;base64," + encodeFileToBase64Binary(new File(path2))));
+        return photoDetails;
     }
-
-//    @GetMapping("/cameras")
-//    public String searchCamerasTop10() {
-//        // 搜对应照片数最多的相机（前10个）
-//        String s = "[{\"value\":\"iphone\",\"display\":\"苹果\"}," +
-//                "{\"value\":\"samsung\",\"display\":\"三星\"}," +
-//                "{\"value\":\"mi\",\"display\":\"小米\"}]";
-//        System.out.println(s);
-//        return s;
-//    }
-//
-//    @GetMapping("/cities")
-//    public String searchCities() {
-//        // 搜所有城市
-//        String s = "[{\"value\":\"Shanghai\",\"display\":\"上海\"}," +
-//                "{\"value\":\"NewYork\",\"display\":\"纽约\"}," +
-//                "{\"value\":\"Chicago\",\"display\":\"芝加哥\"}]";
-//        System.out.println(s);
-//        return s;
-//    }
-
      /*
         以JSON格式返回如下：
-        {"lineChart":[{"name":"iphone","data":[1,2,3,4,5,6,7,8,9,10,11,12]},
-                     {"name":"iphone","data":[1,2,3,4,5,6,7,8,9,10,11,12]},
-                     {……}],
-         "pieChart":[{"name":"Iphone", "percent":"20%"},{"type":"Samsung","percent":"15%"},{……}]
-         "barChart":[{},{},{……}]
-
-         }
+        [{"name":"iphone","data":[1,2,3,4,5,6,7,8,9,10,11,12]},
+         {"name":"iphone","data":[1,2,3,4,5,6,7,8,9,10,11,12]},
+         {……}]
     */
     @GetMapping("/statistic/photos")
     public String searchPhotoNumberByCameraYear(
@@ -131,11 +132,11 @@ public class ReferenceController {
             @RequestParam(name = "year", defaultValue = "2017") String year,
             @RequestParam(name = "cities", required = false) String citiesStr) {
         // 统计在这一年中几种相机拍摄照片分别占比 -> pieChart
-        System.out.println(year);
-        String[] cities = citiesStr.split(",");
-        for (int i=0; i<cities.length; i++) {
-            System.out.println(cities[i]);
-        }
+//        System.out.println(year);
+//        String[] cities = citiesStr.split(",");
+//        for (int i=0; i<cities.length; i++) {
+//            System.out.println(cities[i]);
+//        }
         return "[{\"name\":\"Shanghai\",\"data\":[1.2,5.2,12.2,9.3,7.7,14.2,1.2,7.2,12.2,6.3,7.7,14.2]}," +
                 "{\"name\":\"NewYork\",\"data\":[-1.2,5.2,12.2,6.3,9.7,18.2,1.2,3.2,12.2,6.3,4.7,12.2]}," +
                 "{\"name\":\"London\",\"data\":[5.2,7.2,6.2,6.3,9.7,12.2,1.2,5.2,12.2,6.3,9.7,4.2]}]";
