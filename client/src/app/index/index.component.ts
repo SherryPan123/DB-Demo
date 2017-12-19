@@ -21,42 +21,51 @@ import {User} from "./User";
 export class IndexComponent implements OnInit {
 
   search_type: boolean;
+  invalidSearch: boolean;
+  searching: boolean;
+  searchFailed: boolean;
 
   user: User;
-  searching = false;
-  searchFailed = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
   searchContent = (user: {name: string}) => user.name;
 
   constructor(private _service: UserService, private router: Router) {}
 
   typeahead = (text$: Observable<string>) => (
-        text$
-          .debounceTime(300)
-          .distinctUntilChanged()
-          .do(() => this.searching = true)
-          .switchMap(term =>
-            this._service.searchUsers(term, this.search_type)
-              .do(() => this.searchFailed = false)
-              .catch(() => {
-                this.searchFailed = true;
-                return Observable.of([]);
-              }))
-          .do(() => this.searching = false)
-          .merge(this.hideSearchingWhenUnsubscribed)
+    text$
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .do(() => this.searching = true)
+      .switchMap(term =>
+        this._service.searchUsers(term, this.search_type)
+          .do(() => this.searchFailed = false)
+          .catch(() => {
+            this.searchFailed = true;
+            return Observable.of([]);
+          }))
+      .do(() => this.searching = false)
+      .merge(this.hideSearchingWhenUnsubscribed)
 
   );
 
   ngOnInit() {
     this.search_type = true;
+    this.searching = false;
+    this.invalidSearch = false;
+    this.searchFailed = false;
   }
 
   // Push a search term into the observable stream.
   search(term: string, type: string): void {
-    if (type == "1") {
-      this.router.navigateByUrl('/photos?term='+term);
+    if (term == "") {
+      this.invalidSearch = true;
     } else {
-      this.router.navigateByUrl('/timeline?term='+term);
+      this.invalidSearch = false;
+      if (type == "1") {
+        this.router.navigateByUrl('/photos?term='+term);
+      } else {
+        this.router.navigateByUrl('/timeline?term='+term);
+      }
     }
   }
 

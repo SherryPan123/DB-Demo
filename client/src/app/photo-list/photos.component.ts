@@ -16,16 +16,17 @@ export class PhotosComponent implements OnInit, AfterViewInit {
   @ViewChild(AngularMasonry) masonry: AngularMasonry;
 
   photos$: Observable<Photo[]>;
+  term: "";
 
   // Options
   options: MasonryOptions = {
     transitionDuration: '0.3s',
-    columnWidth: 10,
+    columnWidth: 15,
     itemSelector: '.card',
-    resize: true,
+    resize: false,
     // percentPosition: true,
     fitWidth: true,
-    gutter: 4
+    gutter: 6
   };
 
   ngAfterViewInit() {
@@ -37,11 +38,10 @@ export class PhotosComponent implements OnInit, AfterViewInit {
   constructor(private photoService: PhotoService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    let term = "";
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-      term = params['term'];
+      this.term = params['term'];
     });
-    this.photos$ = this.photoService.searchPhotos(term);
+    this.photos$ = this.photoService.searchPhotos(this.term);
   }
 
 }

@@ -43,24 +43,25 @@ export class StatisticComponent implements OnInit {
 
   constructor(private statisticService: StatisticService) {
     this.query = new Query();
+    this.query.year = 2016;
+    this.query.cameras = "iPhone";
+    this.query.cities = "Barcelona";
     this.cities = [
-      { id: 'shanghai', name: 'Shanghai', status: false },
-      { id: 'newyork', name: 'New York', status: false },
-      { id: 'beijing', name: 'Beijing', status: false },
-      { id: 'chicago', name: 'Chicago', status: false },
-      { id: 'singapore', name: 'Singapore', status: false }
+      { id: 'Barcelona', name: 'Barcelona', status: true },
+      { id: 'Berlin', name: 'Berlin', status: false },
+      { id: 'Paris', name: 'Paris', status: false },
+      { id: 'Catalonia', name: 'Catalonia', status: false },
+      { id: 'Brandenburg', name: 'Brandenburg', status: false }
     ];
     this.cameras = [
-      { id: 'iphone', name: 'iPhone', status: false },
-      { id: 'samsung', name: 'Samsung', status: false },
-      { id: 'mi', name: 'Mi', status: false },
-      { id: 'huawei', name: 'Huawei', status: false },
-      { id: 'canon', name: 'Canon', status: false },
-      { id: 'nokia', name: 'Nokia', status: false },
-      { id: 'chase', name: 'CHASE', status: false },
-      { id: 'denso', name: 'DENSO', status: false },
-      { id: 'acer', name: 'Acer', status: false },
-      { id: 'panasonnic', name: 'Panasonnic', status: false }
+      { id: 'iPhone', name: 'iPhone', status: true },
+      { id: 'Lumia', name: 'Lumia', status: false },
+      { id: 'Canon', name: 'Canon', status: false },
+      { id: 'COOLPIX', name: 'COOLPIX', status: false },
+      { id: 'BlackBerry', name: 'BlackBerry', status: false },
+      { id: 'HUAWEI', name: 'HUAWEI', status: false },
+      { id: 'DMC', name: 'DMC', status: false },
+      { id: 'HTC', name: 'HTC', status: false }
     ]
   }
 
@@ -128,17 +129,18 @@ export class StatisticComponent implements OnInit {
 
   private drawLine() {
     this.options1 = {
-      chart: { type: 'line' },
+      credits: false,
+      chart: { type: 'line', marginTop: 30, height: 460 },
       title: "",
       xAxis: {
         title: {
-          text: '月份'
+          text: 'Month'
         },
         categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
       },
       yAxis: {
         title: {
-          text: '照片数'
+          text: '# photos'
         }
       },
       plotOptions: {
@@ -149,7 +151,7 @@ export class StatisticComponent implements OnInit {
           enableMouseTracking: false
         }
       },
-      series: [{}]
+      series: []
     };
     this.statisticService.searchPhotos(this.query).subscribe(
       data => {
@@ -164,9 +166,13 @@ export class StatisticComponent implements OnInit {
 
   private drawPie() {
     this.options2 = {
-      chart: { type: 'pie' },
+      credits: false,
+      chart: { type: 'pie', marginTop: 30, height: 460 },
       title: "",
       xAxis: {
+        title: {
+          text: 'Month'
+        },
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
       },
       plotOptions: {
@@ -178,6 +184,7 @@ export class StatisticComponent implements OnInit {
         }
       },
       series: [{
+        name: '# photos',
         type: 'pie',
         allowPointSelect: true,
         keys: ['name', 'y', 'selected', 'sliced'],
@@ -199,17 +206,18 @@ export class StatisticComponent implements OnInit {
 
   private drawBar() {
     this.options3 = {
-      chart: { type: 'column' },
+      credits: false,
+      chart: { type: 'column', marginTop: 30, height: 460 },
       title: "",//{ text : '各城市发布照片数'},
       xAxis: {
         title: {
-          text: '月份'
+          text: 'Month'
         },
         categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
       },
       yAxis: {
         title: {
-          text: '照片数'
+          text: '# photos'
         }
       },
       plotOptions: {

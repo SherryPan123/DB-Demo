@@ -1,21 +1,21 @@
 <div class="row">
   <div class="col-sm-8 blog-main">
     <div class="blog-post">
-      <h2 class="blog-post-title">Sample blog post</h2>
-      <p class="blog-post-meta">comments <a href="#">xxx</a></p>
+      <h2 class="blog-post-title">Statistics</h2>
+      <p class="blog-post-meta">data from <a href="#">flickr</a></p>
 
       <ngb-tabset #t="ngbTabset" (tabChange)="beforeChange($event)">
-        <ngb-tab id="tab-1" title="各相机的照片统计">
+        <ngb-tab id="tab-1" title="Annual camera">
           <ng-template ngbTabContent>
             <chart [options]="options1" (load)="saveInstance1($event.context)"></chart>
           </ng-template>
         </ngb-tab>
-        <ngb-tab id="tab-2" title="各品牌的使用统计">
+        <ngb-tab id="tab-2" title="Overall camera">
           <ng-template ngbTabContent>
             <chart [options]="options2" (load)="saveInstance2($event.context)"></chart>
           </ng-template>
         </ngb-tab>
-        <ngb-tab id="tab-3" title="各城市的照片统计">
+        <ngb-tab id="tab-3" title="Annual city">
           <ng-template ngbTabContent>
             <chart [options]="options3" (load)="saveInstance3($event.context)"></chart>
           </ng-template>
@@ -25,18 +25,18 @@
     </div><!-- /.blog-post -->
   </div><!-- /.blog-main -->
 
-  <aside class="col-sm-3 ml-sm-auto blog-sidebar">
+  <aside class="col-sm-4 ml-sm-auto blog-sidebar">
     <div class="sidebar-module sidebar-module-inset">
-      <h4>搜索条件</h4>
+      <h4>Criterion</h4>
       <br>
       <form>
         <div class="form-group">
-          <label for="year">年份</label>
-          <input #year id="year" name="year" type="number" class="form-control" min="1900" max="2099" step="1" placeholder="2017" (change)="query.year=year.value"/>
+          <label for="year">Year</label>
+          <input #year id="year" name="year" type="number" class="form-control" min="1900" max="2099" step="1" placeholder="2016" (change)="query.year=year.value"/>
         </div>
 
         <div class="form-group">
-          <label>城市</label><br>
+          <label>City</label><br>
           <label class="custom-control custom-checkbox" *ngFor="let city of cities">
             <input type="checkbox" class="custom-control-input" value="{{city.id}}" [checked]="city.status" (change)="city.status = !city.status">
             <span class="custom-control-indicator"></span>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-          <label>相机</label><br>
+          <label>Camera</label><br>
           <label class="custom-control custom-checkbox" *ngFor="let camera of cameras">
             <input type="checkbox" class="custom-control-input" value="{{camera.id}}" [checked]="camera.status" (change)="camera.status = !camera.status">
             <!--(click)="addcameraToQuery(camera.id, checkStatus1)"-->
@@ -54,11 +54,11 @@
           </label>
         </div>
 
-        <button type="button" class="btn btn-outline-primary" (click)="search(t)">搜索</button>
+        <button type="button" class="btn btn-outline-primary" (click)="search(t)">Search</button>
       </form>
     </div>
     <!--<div class="sidebar-module">-->
-      <!--<h4>xxx</h4>-->
+    <!--<h4>xxx</h4>-->
     <!--</div>-->
   </aside><!-- /.blog-sidebar -->
 </div>

@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'index', component: IndexComponent },
   { path: 'timeline', component: TimelineComponent },
-  { path: 'statistic', component: StatisticComponent }
+  { path: 'statistics', component: StatisticComponent }
 ]
 
 @NgModule({

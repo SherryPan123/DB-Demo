@@ -1,47 +1,52 @@
 /* PhotosComponent's private CSS styles */
-.photos {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-.photos li {
-  cursor: pointer;
-  position: relative;
-  left: 0;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
-}
-.photos li.selected:hover {
-  background-color: #BBD8DC !important;
-  color: white;
-}
-.photos li:hover {
-  color: #607D8B;
-  background-color: #DDD;
-  left: .1em;
-}
-.photos .text {
-  position: relative;
-  top: -3px;
-}
+/*.photos {*/
+/*margin: 0 0 2em 0;*/
+/*list-style-type: none;*/
+/*padding: 0;*/
+/*width: 15em;*/
+/*}*/
+/*.photos li {*/
+/*cursor: pointer;*/
+/*position: relative;*/
+/*left: 0;*/
+/*background-color: #EEE;*/
+/*margin: .5em;*/
+/*padding: .3em 0;*/
+/*height: 1.6em;*/
+/*border-radius: 4px;*/
+/*}*/
+/*.photos li.selected:hover {*/
+/*background-color: #BBD8DC !important;*/
+/*color: white;*/
+/*}*/
+/*.photos li:hover {*/
+/*color: #607D8B;*/
+/*background-color: #DDD;*/
+/*left: .1em;*/
+/*}*/
+/*.photos .text {*/
+/*position: relative;*/
+/*top: -3px;*/
+/*}*/
 
 
 /*[masonry-brick]{*/
-  /*width: 250px;*/
-  /*margin: 10px;*/
-  /*background: rgb(0, 0, 0);*/
+/*width: 250px;*/
+/*margin: 10px;*/
+/*background: rgb(0, 0, 0);*/
 /*}*/
 p {
   color: #999;
 }
 
 .card {
-  margin-bottom: 4px;
-  /*width: 40%*/
+  margin-bottom: 10px;
+  max-width: 10rem;
+}
+
+img:hover {
+  opacity: .6;
+  filter: Alpha(opacity = 60)
 }
 
 .masonry-container {

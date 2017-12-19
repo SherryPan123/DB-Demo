@@ -1,30 +1,26 @@
 <!--<div class="blog-header">-->
-  <!--<div class="container">-->
-    <!--<h1 class="blog-title">数据库项目演示</h1>-->
-    <!--<p class="lead blog-description">An example blog template built with Bootstrap.</p>-->
-  <!--</div>-->
+<!--<div class="container">-->
+<!--<h1 class="blog-title">数据库项目演示</h1>-->
+<!--<p class="lead blog-description">An example blog template built with Bootstrap.</p>-->
+<!--</div>-->
 <!--</div>-->
 
 
-<div class="row">
-  <div class="col-md-2 offset-md-5"><img src="../../assets/f.jpg" style="height: 120px"></div>
-  <div class="col-md-12">
-    <br>
-  </div>
+<div class="row main">
+  <div class="col-md-2 offset-md-5 logo"><img src="../../assets/f.jpg" style="height: 150px"></div>
   <div class="col-md-6 offset-md-3">
     <div class="form-group">
       <div class="input-group">
         <select class="custom-select" #searchType required (change)="changeSearchType(searchType.value)">
-          <option value="1">Search Photos</option>
-          <option value="2">Search Users</option>
+          <option value="1">Photos</option>
+          <option value="2">Users</option>
         </select>
-        <input #searchBox id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [ngbTypeahead]="typeahead" [(ngModel)]="user" [inputFormatter]="searchContent" [resultFormatter]="searchContent" placeholder="Descriptions" (selectItem)="selectedItem($event)" />
-        <button type="button" class="btn btn-outline-primary" (click)="search(searchBox.value, searchType.value)">Search</button>
+        <input #searchBox id="typeahead-http" type="text" class="form-control keyword" [class.is-invalid]="searchFailed" [ngbTypeahead]="typeahead" [(ngModel)]="user" [inputFormatter]="searchContent" [resultFormatter]="searchContent" placeholder="Keyword" (selectItem)="selectedItem($event)" required/>
+        <button type="button" class="btn btn-outline-primary search" (click)="search(searchBox.value, searchType.value)">Search</button>
         <!--<pre>Model: {{ user | json }}</pre>-->
-        <span *ngIf="searching">searching...</span>
-        <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       </div>
+      <div class="invalid-feedback">Sorry, suggestions could not be loaded.</div>
+      <div class="text-center error" *ngIf="invalidSearch">Please input the keyword.</div>
     </div>
   </div>
 </div>
-

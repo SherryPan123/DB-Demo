@@ -1,35 +1,25 @@
-<div class="row justify-content-center">
-  <div class="col-12">
+<div class="row">
+  <div class="col-12 blog-main">
+    <div class="blog-post">
       <div class="row">
-        <div class="col-1"></div>
-        <div class="col-3">
-          <h4>Photos Gallery</h4>
-          <p>Results of searching(about 0.3s)</p>
+        <div class="col-11">
+          <h2 class="blog-post-title">Photos Gallery</h2>
+          <p class="blog-post-meta">Results of searching {{term}}</p>
         </div>
-        <div class="col-6">
-          <div class="form-group">
-            <div class="input-group">
-              <select class="custom-select" #searchType required>
-                <option value="1">Search Photos</option>
-                <option value="2">Search Users</option>
-              </select>
-              <input #searchBox id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="model" placeholder="Descriptions" />
-              <button type="button" class="btn btn-outline-primary" (click)="search(searchBox.value, searchType.value)">Search</button>
-              <span *ngIf="searching">searching...</span>
-              <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
-            </div>
+        <div class="col-1">
+          <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" [routerLink]="['']">Back</a>
+          </nav>
+        </div>
+      </div>
+      <br>
+      <masonry [options]="options" class="masonry-container">
+        <div masonry-brick *ngFor="let photo of photos$ | async">
+          <div class="card rounded border">
+            <img class="card-img-top" src="{{photo.image}}" alt="Card image cap">
           </div>
         </div>
-        <div class="col-2"></div>
-      </div>
-
-
-    <masonry [options]="options" class="masonry-container">
-      <div masonry-brick *ngFor="let photo of photos$ | async">
-        <div class="card" style="max-width: 10rem;">
-          <img class="card-img-top" src="{{photo.image}}" alt="Card image cap">
-        </div>
-      </div>
-    </masonry>
-</div>
+      </masonry>
+    </div>
+  </div>
 </div>

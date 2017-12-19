@@ -1,14 +1,58 @@
+p {
+  color: #999;
+}
+
 .card {
-  margin-bottom: 10px;
-  /*width: 40%*/
+  width: 30%;
+  margin-bottom: 6px;
+}
+
+img:hover {
+  opacity: .6;
+  filter: Alpha(opacity = 60)
 }
 
 .masonry-container {
   margin: 0 auto; /* this is the css that keeps the container centered in page */
 }
 
+.avatar {
+  height: 120px;
+  width: 120px;
+}
+
+.thumb-up, .thumb-down {
+  color: #555555;
+  font-size: 1rem;
+}
+
+.thumb-up:hover {
+  color: #428bca;
+}
+
+.thumb-down:hover {
+  color: #dc3545;
+}
+
+.larger-font {
+  font-size: large;
+}
+
+.card-body {
+  padding: 0.5rem;
+  font-size: small;
+  text-align: center;
+}
+
+.font-large {
+  font-size: 1rem;
+}
+
+.space {
+  margin-right: 10px;
+}
 /*.masonry_item {*/
-  /*width:300px;*/
-  /*margin:0 auto 20px auto;*/
-  /*padding:20px;*/
+/*width:300px;*/
+/*margin:0 auto 20px auto;*/
+/*padding:20px;*/
 /*}*/

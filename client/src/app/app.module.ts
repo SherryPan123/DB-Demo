@@ -15,15 +15,9 @@ import { StatisticService } from "./shared/statistic.service";
 import { MultiselectDropdownModule } from "angular-2-dropdown-multiselect";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {TimelineComponent} from "./timeline/timeline.component";
+import {PhotoModalContent, TimelineComponent} from "./timeline/timeline.component";
 import {TimelineService} from "./shared/timeline.service";
 import {UserService} from "./shared/user.service";
-// import {
-//   MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
-//   MatMenuModule, MatOptionModule, MatSelectModule, MatSliderModule,
-//   MatTabsModule, MatToolbarModule
-// } from "@angular/material";
-// import {MdCardModule} from "@angular2-material/card";
 
 export function highchartsFactory() {
   return require('highcharts');
@@ -35,45 +29,21 @@ export function highchartsFactory() {
     IndexComponent,
     PhotosComponent,
     StatisticComponent,
-    TimelineComponent
+    TimelineComponent,
+    PhotoModalContent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    // MdCardModule,
     MasonryModule,
     ChartModule,
     MultiselectDropdownModule,
     BrowserAnimationsModule,
-    NgbModule.forRoot()
-    // MatButtonModule,
-    // MatCheckboxModule,
-    // MatSliderModule,
-    // MatTabsModule,
-    // MatGridListModule,
-    // MatIconModule,
-    // MatToolbarModule,
-    // MatCardModule,
-    // MatMenuModule,
-    // MatFormFieldModule,
-    // MatOptionModule,
-    // MatSelectModule,
+    NgbModule.forRoot(),
   ],
   exports: [
-    // MatButtonModule,
-    // MatCheckboxModule,
-    // MatSliderModule,
-    // MatTabsModule,
-    // MatGridListModule,
-    // MatIconModule,
-    // MatToolbarModule,
-    // MatCardModule,
-    // MatMenuModule,
-    // MatFormFieldModule,
-    // MatOptionModule,
-    // MatSelectModule
   ],
   providers: [
     PhotoService,
@@ -85,6 +55,7 @@ export function highchartsFactory() {
       useFactory: highchartsFactory
     }
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  entryComponents: [ PhotoModalContent ]
 })
 export class AppModule { }
